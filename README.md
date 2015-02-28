@@ -79,3 +79,4 @@ Setup the database for your application (development and test environments):
 ## Good Luck! 
 
 *We want all attendees at netguru workshops to have an awesome harassment-free experience. Read our full [code of conduct](https://github.com/netguru-training/workshops/blob/master/code_of_conduct.md) for more details.*
+# netguru-workships
