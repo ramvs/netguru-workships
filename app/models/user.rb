@@ -7,6 +7,5 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :products
 
-  attr_accessor :firstname, :lastname
   validates_presence_of :firstname, :lastname
  end
