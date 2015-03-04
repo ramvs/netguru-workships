@@ -5,9 +5,10 @@
   = category.name
 
 %p
+  = link_to("Show all products", category_products_path(category.id))
+%p
   - category.products.each do |product|
-    = product.title
-
+    = link_to(product.title, category_product_path(product.category, product))
 %p
   %h3 New product
   = render 'products/form'

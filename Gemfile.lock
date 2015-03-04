@@ -84,6 +84,8 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     ffaker (1.25.0)
     ffi (1.9.6)
+    font-awesome-rails (4.3.0.0)
+      railties (>= 3.2, < 5.0)
     gh (0.13.2)
       addressable
       backports
@@ -226,6 +228,7 @@ DEPENDENCIES
   draper
   factory_girl_rails
   ffaker
+  font-awesome-rails
   haml-rails
   jquery-rails
   konf
