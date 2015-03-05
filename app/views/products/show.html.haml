@@ -1,25 +1,36 @@
-%p#notice= notice
-%p#error= flash[:error]
+%body
+  .container
+    %p#notice= notice
+    %p#error= flash[:error]
+    %p
+      %b Title:
+      = product.title
+    %p
+      %b Description:
+      = product.description
+    %p
+      %b Price:
+      = product.price
 
-%p
-  %b Title:
-  = product.title
-%p
-  %b Description:
-  = product.description
-%p
-  %b Price:
-  = product.price
+    %p
+      %b Category
+      = product.category.name
 
-%p
-  %b Category
-  = product.category.name
+    %h3 Reviews
+    -if current_user
+      -unless Review.exists?( {product_id: product[:id], user_id: current_user[:id]})
+        = render 'reviews/form'
+    %table{:class => "table table-hover"}
+      %tr
+        %th Content
+        %th Rating
+        %th Author
+      - reviews.each do |review|
+        %tr
+          %td= review.content
+          %td= review.rating
+          %td= review.author
 
-%h3 Reviews
-= render 'reviews/form'
-
-= render reviews
-
-= link_to 'Edit', edit_category_product_path(category.id, product.id)
-\|
-= link_to 'Back', category_products_path, class: 'btn btn-primary'
+    = link_to 'Edit', edit_category_product_path(category.id, product.id)
+    \|
+    = link_to 'Back', category_products_path, class: 'btn btn-primary'

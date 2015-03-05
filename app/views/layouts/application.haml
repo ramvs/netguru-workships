@@ -16,11 +16,15 @@
         %p.navbar-text.navbar-right
           - if user_signed_in?
             = 'Welcome   ' + current_user.firstname
-            = link_to edit_user_registration_path do
-              %i.fa.fa-edit.fa-1x  Edit profile
+            = link_to root_path do
+              %i.fa.fa-home.fa-1x Home
+            = link_to user_path(current_user) do
+              %i.fa.fa-edit.fa-1x  Profile
             = link_to destroy_user_session_path, :method => 'delete' do
               %i.fa.fa-sign-out.fa-1x  Logout
           - else
+            = link_to root_path do
+              %i.fa.fa-home.fa-1x Home
             = link_to new_user_session_path do
               %i.fa.fa-sign-in.fa-1x   Login
             = link_to new_user_registration_path do

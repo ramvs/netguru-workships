@@ -8,4 +8,9 @@ class User < ActiveRecord::Base
   has_many :products
 
   validates_presence_of :firstname, :lastname
+
+  def last_reviews
+    self.reviews.order("created_at desc").limit(5)
+  end
+
  end

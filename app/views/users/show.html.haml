@@ -1,0 +1,34 @@
+%body
+  .container
+    .col-md-6
+      %h1
+        = current_user.firstname + "'s" + " profile"
+      %p
+        %b Firstname:
+        = current_user.firstname
+        %br
+        %b Lastname:
+        = current_user.lastname
+        %br
+        %b Email:
+        = current_user.email
+        %br
+        %b Number of reviews:
+        = current_user.reviews.count
+
+    .col-md-6
+      %h1
+        = "Your last five reviews"
+      %table{:class => "table table-hover"}
+        %tr
+          %th Product
+          %th Content
+          %th Your rating
+          %th Date
+        - current_user.last_reviews.each do |review|
+          %tr
+            %td= link_to(Product.find(review.product_id).title,
+              category_product_path(review.reviewed_product_category, review.review_of_product))
+            %td= review.content
+            %td= review.rating
+            %td= review.created_at.strftime("%d/%m/%Y")
