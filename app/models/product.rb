@@ -7,11 +7,14 @@ class Product < ActiveRecord::Base
             format: {with: /\A\d+(\.\d{1,2})?\z/}
 
   def average_rating
-    sum = 0.0
-    reviews.each do |review|
-      sum += review.rating
+    unless reviews.empty?
+      sum = 0.0
+      reviews.each do |review|
+        sum += review.rating
+      end
+      return sum/reviews.count
     end
-    sum/reviews.count
+    "No reviews"
   end
 
   def added_by
