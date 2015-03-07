@@ -32,6 +32,7 @@ review_list = [
   ["Very good car!", 5,"04-03-2015",1,1],
   ["Awful car"    , 2,"05-03-2015",2,2],
   ["Nice car"     , 4,"05-03-2015",4,4],
+  ["Definitely worth the money!", 5,"01-03-2015",1,3],
 
   ["Very good book!", 5,"04-03-2015",5,1],
   ["Nice book!"     , 3,"05-03-2015",6,2],
