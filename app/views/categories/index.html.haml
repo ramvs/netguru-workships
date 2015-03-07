@@ -1,26 +1,29 @@
 %body
   .container
-    %h1 Listing categories
+    .well
+      -unless categories.empty?
+        %h1 Listing categories
 
-    %table.table{:class => "table table-hover"}
-      %tr
-        %th Name
-        %th Number of products
-        %th
-        %th
-        %th
+        %table.table{:class => "table table-hover"}
+          %tr
+            %th Name
+            %th Number of products
+            %th
+            -if current_user && current_user.admin?
+              %th
+              %th
 
-      - categories.each do |category|
-        %tr
-          %td= category.name
-          %td= category.products.count
-          %td= link_to 'Show', category
-          - if current_user && current_user.admin?
-            %td= link_to 'Edit', edit_category_path(category)
-            %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
-
-    %br
-      - if current_user && current_user.admin?
-        = link_to 'New Category', new_category_path
-
-
+          - categories.each do |category|
+            %tr
+              %td= category.name
+              %td= category.products.count
+              %td= link_to 'Show', category
+              - if current_user && current_user.admin?
+                %td= link_to 'Edit', edit_category_path(category)
+                %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
+      -else
+        %h3{:style => "text-align:center;"}
+          There is no categories. Only administrator can add new category.
+      %br
+        - if current_user && current_user.admin?
+          = link_to 'New Category', new_category_path, class: 'btn btn-primary'

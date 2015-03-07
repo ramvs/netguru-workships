@@ -9,26 +9,36 @@
     = javascript_include_tag 'application'
 
   %body
-    %nav.navbar.navbar-default
+    %nav.navbar.navbar-default.navbar-inverse
       .container-fluid
         .navbar-header
           %span.navbar-brand #{AppConfig.workshops_name}
-        %p.navbar-text.navbar-right
-          - if user_signed_in?
-            = 'Welcome   ' + current_user.firstname
-            = link_to root_path do
-              %i.fa.fa-home.fa-1x Home
-            = link_to user_path(current_user) do
-              %i.fa.fa-edit.fa-1x  Profile
-            = link_to destroy_user_session_path, :method => 'delete' do
-              %i.fa.fa-sign-out.fa-1x  Logout
-          - else
-            = link_to root_path do
-              %i.fa.fa-home.fa-1x Home
-            = link_to new_user_session_path do
-              %i.fa.fa-sign-in.fa-1x   Login
-            = link_to new_user_registration_path do
-              %i.fa.fa-arrow-circle-up.fa-1x   Sign up
+        %ul.nav.navbar-nav.navbar-right
+          -if user_signed_in?
+            %li
+              = link_to "#" do
+                %i.fa.fa-exclamation.fa-1x
+                  = 'Welcome '+ current_user.firstname
+            %li
+              =link_to root_path do
+                %i.fa.fa-home.fa-1x Home
+            %li
+              = link_to user_path(current_user) do
+                %i.fa.fa-edit.fa-1x  Profile
+            %li
+              = link_to destroy_user_session_path, :method => 'delete' do
+                %i.fa.fa-sign-out.fa-1x  Logout
+          -else
+            %li
+              = link_to root_path do
+                %i.fa.fa-home.fa-1x Home
+            %li
+              = link_to new_user_session_path do
+                %i.fa.fa-sign-in.fa-1x   Login
+            %li
+              = link_to new_user_registration_path do
+                %i.fa.fa-arrow-circle-up.fa-1x   Sign up
+
     .container-fluid
       .row
         .col-lg-12

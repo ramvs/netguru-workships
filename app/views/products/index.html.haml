@@ -1,25 +1,27 @@
 %body
   .container
-    %h1 Listing products
+    .well
+      %h1
+        = 'Listing products of ' + category.name.downcase
 
-    %table{:class => "table table-hover"}
-      %tr
-        %th Title
-        %th Description
-        %th Price
-        %th Average Rating
-        %th
-        %th
-        %th
-
-      - products.each do |product|
+      %table{:class => "table table-hover"}
         %tr
-          %td= product.title
-          %td= product.description
-          %td= product.price
-          %td= product.average_rating
-          %td= link_to 'Show', category_product_path(product.category, product)
-          -if current_user && current_user.admin?
-            %td= link_to 'Edit', edit_category_product_path(product.category, product)
-            %td= link_to 'Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }
-          %br
+          %th Title
+          %th Description
+          %th Price
+          %th Average Rating
+          %th
+          %th
+          %th
+        - category.products.each do |product|
+          %tr
+            %td= product.title
+            %td= product.description
+            %td= product.price
+            %td= product.average_rating
+            %td= link_to 'Show', category_product_path(product.category, product)
+            -if current_user && current_user.admin?
+              %td= link_to 'Edit', edit_category_product_path(product.category, product)
+              %td= link_to 'Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }
+        %p
+          = link_to 'Back', category, class: 'btn btn-primary'

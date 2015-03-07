@@ -1,21 +1,28 @@
 %body
   .container
     %p#notice= notice
+    .well
+      %p
+        %b Category name:
+        = category.name
+      %p
+        %b Number of products
+        = category.products.count
 
-    %p
-      %b Name:
-      = category.name
+      %p
+        - category.products.each do |product|
+          = link_to(product.title + "(" + product.average_rating.to_s + ")",
+           category_product_path(product.category, product))
+      .col-md-6
+      %p{:style => "text-align : right;"}
+        = link_to "Show all products", category_products_path(category.id), class: 'btn btn-primary'
+      -if current_user && current_user.admin?
+        %p{:style => "text-align : right;"}
+          = link_to 'Edit category', edit_category_path(category), class: 'btn btn-primary'
+    .well
+      %p
+        %h3 New product
+        = render 'products/form'
 
-    %p
-      = link_to("Show all products", category_products_path(category.id))
-    %p
-      - category.products.each do |product|
-        = link_to(product.title + "(" + product.average_rating.to_s + ")",
-         category_product_path(product.category, product))
-    %p
-      %h3 New product
-      = render 'products/form'
-
-    = link_to 'Edit', edit_category_path(category)
-    \|
-    = link_to 'Back', categories_path, class: 'btn btn-primary'
+        %p{:style => "text-align : right;"}
+          = link_to 'Back', categories_path, class: 'btn btn-primary'

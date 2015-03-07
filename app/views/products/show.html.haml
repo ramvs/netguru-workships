@@ -2,35 +2,41 @@
   .container
     %p#notice= notice
     %p#error= flash[:error]
-    %p
-      %b Title:
-      = product.title
-    %p
-      %b Description:
-      = product.description
-    %p
-      %b Price:
-      = product.price
-
-    %p
-      %b Category
-      = product.category.name
-
-    %h3 Reviews
+    .well
+      %p
+        %b Title:
+        = product.title
+      %p
+        %b Description:
+        = product.description
+      %p
+        %b Price:
+        = product.price
+      %p
+        %b Added by:
+        = product.added_by
     -if current_user
       -unless Review.exists?( {product_id: product[:id], user_id: current_user[:id]})
-        = render 'reviews/form'
-    %table{:class => "table table-hover"}
-      %tr
-        %th Content
-        %th Rating
-        %th Author
-      - reviews.each do |review|
-        %tr
-          %td= review.content
-          %td= review.rating
-          %td= review.author
-
-    = link_to 'Edit', edit_category_product_path(category.id, product.id)
-    \|
-    = link_to 'Back', category_products_path, class: 'btn btn-primary'
+        .well
+          %h3 Write your review
+          = render 'reviews/form'
+    .well
+      %h3 Reviews
+      -unless reviews.empty?
+        %table{:class => "table table-hover"}
+          %tr
+            %th Content
+            %th Rating
+            %th Author
+          - reviews.each do |review|
+            %tr
+              %td= review.content
+              %td= review.rating
+              %td= review.author
+        -if current_user && current_user.id == product.user_id
+          = link_to 'Edit', edit_category_product_path(category.id, product.id)
+          |
+        = link_to 'Back', category, class: 'btn btn-primary'
+      -else
+        %h3{:style => "text-align: center"}
+          There is no reviews for this product
