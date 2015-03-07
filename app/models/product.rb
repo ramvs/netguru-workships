@@ -13,5 +13,8 @@ class Product < ActiveRecord::Base
     end
     sum/reviews.count
   end
-end
 
+  def added_by
+    User.find(self.user_id).firstname + " " + User.find(self.user_id).lastname
+  end
+end

@@ -7,18 +7,16 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    self.review = Review.new(review_params)
+    self.review = Review.new(review_params,current_user)
     review[:user_id] = current_user[:id]
     unless Review.exists?( {product_id: product[:id], user_id: current_user[:id]})
-    if review.save
-      product.reviews << review
-      redirect_to category_product_url(product.category, product), notice: 'Review was successfully created.'
-    else
-      render action: 'new'
-    end
-    else
-      flash[:error] = "You have already reviewed this product."
-      redirect_to category_product_url(product.category, product)
+      if review.save
+        product.reviews << review
+        redirect_to category_product_url(product.category, product), notice: 'Review was successfully created.'
+      else
+        flash[:error] = "Fill all fields reviews"
+        redirect_to category_product_url(product.category, product)
+      end
     end
   end
 

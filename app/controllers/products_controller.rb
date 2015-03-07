@@ -23,9 +23,8 @@ class ProductsController < ApplicationController
 
   def create
     return redirect_to new_user_session_path unless user_signed_in?
-
     self.product = Product.new(product_params)
-
+    product[:user_id] = current_user[:id]
     if product.save
       category.products << product
       redirect_to category_product_url(category, product), notice: 'Product was successfully created.'

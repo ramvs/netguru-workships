@@ -19,7 +19,8 @@ gem 'therubyracer', platforms: :ruby
 gem 'travis'
 gem 'ffaker'
 gem 'konf'
-gem "font-awesome-rails"
+gem "font-awesome-rails" #icons
+gem 'bootstrap_form' #forms based on bootstrap
 
 group :development do
   gem 'spring'
